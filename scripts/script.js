@@ -1,31 +1,29 @@
-// .ready() = is a method of jquery 
-// function(){} in method is an IIFE
-$(document).ready(function () {
-  console.log("doc is ready");
+$(function() {
+  console.log("document is ready!");
 
-  let $start_counter = $("#event-start"),
-  counts = [0,0,0], 
-  updateCounterStatus = 0
-  ;
-
-  $("#dogeDiv").draggable(
-    {
-    start: function () {
-      counts[0]++;
-      console.log(counts[0]);
-    }
-    }
-  );
-
-  $("#doge").draggable();
-
-  let userGreeting = "Hello there, ";
-
-  $("button").click(function () {
-    userGreeting += $("#fname").val();
-
-    $("#greetingOutput").text(userGreeting);
-
+  $("#doge-meme-pic").draggable({
+      containment: "#containment-wrapper",
+      scroll: false,
+      stop: function() 
+      {
+        calculateWow();
+      }
   });
+
+  function calculateWow() {
+      var x = $("#doge-meme-pic").position();
+      var wow = x.top + x.left;
+
+      if (wow < 500) 
+      {
+          console.log('not much wow (' + wow + ')');
+          $('#wow-output').html('<h2>not much wow (' + wow + ')</h2>')
+      } 
+      else
+      {
+          console.log('so much wow (' + wow + ')!!!!');
+          $('#wow-output').html('<h2>so much wow (' + wow + ')!!</h2>')
+      }
+  }
 
 });
